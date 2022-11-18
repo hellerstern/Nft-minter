@@ -18,6 +18,9 @@ const wallet = await getWallet();
 
 const program = await getProgram(wallet);
 
+///////////
+// Edit this part
+let beneficiary = new anchor.web3.PublicKey("5p5pzWAJnT8vZtKaGRZxpQiz6fu35bYwLmrVNbjLtbuT")
 let uris = ["hello", "hi"];
 let creator = [
   "5p5pzWAJnT8vZtKaGRZxpQiz6fu35bYwLmrVNbjLtbuT",
@@ -25,6 +28,8 @@ let creator = [
 ];
 let name = ["hi", "ki"];
 let symbol = ["SYM", "BOL"];
+
+/////
 
 async function mintMultipleNfts() {
   if (
@@ -49,7 +54,7 @@ async function mint(creator, uri, name, symbol) {
 
   const NftTokenAccount = await anchor.web3.PublicKey.findProgramAddress(
     [
-      wallet.publicKey.toBuffer(),
+      beneficiary.toBuffer(),
       TOKEN_PROGRAM_ID.toBuffer(),
       mint.publicKey.toBuffer(),
     ],
@@ -72,7 +77,7 @@ async function mint(creator, uri, name, symbol) {
     .mint(creator, uri, name, symbol)
     .accounts({
       owner: wallet.publicKey,
-      beneficiary: wallet.publicKey,
+      beneficiary: beneficiary,
       tokenProgram: TOKEN_PROGRAM_ID,
       metadata: metadata[0],
       authority: wallet.publicKey,
