@@ -162,7 +162,7 @@ pub struct mint<'info> {
     ///CHECK
     #[account(mut)]
     pub metadata: UncheckedAccount<'info>,
-
+    ///CHECK
     #[account(mut)]
     pub authority: UncheckedAccount<'info>,
     ///CHECK
